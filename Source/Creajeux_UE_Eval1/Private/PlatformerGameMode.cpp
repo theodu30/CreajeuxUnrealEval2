@@ -48,3 +48,15 @@ void APlatformerGameMode::CallReset()
 	
 	OnReset.Broadcast();
 }
+
+void APlatformerGameMode::AddToCoinTotal(const int Amount)
+{
+	CoinTotalCounter += Amount;
+	OnCoinTotal.Broadcast(CoinTotalCounter);
+}
+
+void APlatformerGameMode::AddToUpgradeTotal(const int Amount)
+{
+	UpgradeTotalCounter += Amount;
+	OnUpgradeTotal.Broadcast(UpgradeTotalCounter);
+}

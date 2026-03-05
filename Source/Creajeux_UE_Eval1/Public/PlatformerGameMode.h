@@ -73,4 +73,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CallReset();
 	
+	UFUNCTION(BlueprintCallable)
+	void AddToCoinTotal(const int Amount);
+	
+	UFUNCTION(BlueprintCallable)
+	void AddToUpgradeTotal(const int Amount);
+	
 };

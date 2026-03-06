@@ -84,5 +84,7 @@ void AChest::SetEnabled(bool bEnable)
 	ProximityComponent->SetGenerateOverlapEvents(bEnable);
 	LidMeshComponent->SetVisibility(bEnable);
 	CoinMeshComponent->SetVisibility(bEnable);
+	
+	TargetLidRotation = FRotator(0, 0, 0);
 }
 

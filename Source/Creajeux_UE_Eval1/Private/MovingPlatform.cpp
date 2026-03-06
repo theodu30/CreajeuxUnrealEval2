@@ -36,7 +36,6 @@ void AMovingPlatform::Tick(float DeltaTime)
 	if (SplineComponent->IsClosedLoop())
 	{
 		ElapsedTime += PlatformSpeed * DeltaTime;
-		UE_LOG(LogTemp, Warning, TEXT("ClosedLoop, Time: %f"), ElapsedTime)
 		
 		if (ElapsedTime >= SplineComponent->Duration)
 		{
@@ -47,7 +46,6 @@ void AMovingPlatform::Tick(float DeltaTime)
 	{
 		if (!bGoBackward)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("OpenLoop, Forward, Time: %f"), ElapsedTime)
 			ElapsedTime += PlatformSpeed * DeltaTime;
 			if (ElapsedTime >= SplineComponent->Duration)
 			{
@@ -57,7 +55,6 @@ void AMovingPlatform::Tick(float DeltaTime)
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("OpenLoop, Backward, Time: %f"), ElapsedTime)
 			ElapsedTime -= PlatformSpeed * DeltaTime;
 			if (ElapsedTime <= 0)
 			{

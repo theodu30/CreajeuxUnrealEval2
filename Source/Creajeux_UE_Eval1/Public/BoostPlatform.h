@@ -29,6 +29,12 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Components)
 	TObjectPtr<UBoxComponent> BoxComponent;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bOverrideXYMovement = true;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bOverrideZMovement = true;
 
 protected:
 	// Called when the game starts or when spawned

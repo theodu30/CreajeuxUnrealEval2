@@ -18,6 +18,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float Speed = 1.f;
 	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool RandomStart = false;
+	
 protected:
 	virtual void BeginPlay() override;
 	

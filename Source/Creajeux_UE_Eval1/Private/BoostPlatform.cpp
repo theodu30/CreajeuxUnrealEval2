@@ -50,7 +50,7 @@ void ABoostPlatform::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AA
 		{
 			const FVector BoostVector = BoostStrength * ArrowComponent->GetForwardVector() + 100.f * FVector::UpVector;
 			
-			PlayerCharacter->LaunchCharacter(BoostVector, true, true);
+			PlayerCharacter->LaunchCharacter(BoostVector, bOverrideXYMovement, bOverrideZMovement);
 		}
 	}
 }

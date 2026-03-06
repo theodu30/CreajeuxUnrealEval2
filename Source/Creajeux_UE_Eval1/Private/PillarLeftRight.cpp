@@ -9,9 +9,11 @@ void APillarLeftRight::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	Alpha = FMath::RandRange(0.f, 1.f);
-	
-	bToB = FMath::RandBool();
+	if (RandomStart)
+	{
+		Alpha = FMath::RandRange(0.f, 1.f);
+		bToB = FMath::RandBool();
+	}
 }
 
 void APillarLeftRight::Tick(float DeltaSeconds)

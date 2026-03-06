@@ -10,19 +10,9 @@ ADoor::ADoor()
 	PrimaryActorTick.bCanEverTick = true;
 
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>("StaticMeshComponent");
-	if (!StaticMeshComponent)
-	{
-		UE_LOG(LogTemp, Error, TEXT("StaticMeshComponent is null"));
-		return;
-	}
 	StaticMeshComponent->SetupAttachment(RootComponent);
 
 	DoorMesh = CreateDefaultSubobject<UStaticMeshComponent>("DoorMesh");
-	if (!DoorMesh)
-	{
-		UE_LOG(LogTemp, Error, TEXT("DoorMesh is null"));
-		return;
-	}
 	DoorMesh->SetupAttachment(StaticMeshComponent);
 }
 

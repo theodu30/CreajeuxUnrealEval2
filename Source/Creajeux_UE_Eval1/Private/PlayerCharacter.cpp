@@ -25,20 +25,10 @@ APlayerCharacter::APlayerCharacter()
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f);
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(FName("SpringArm"));
-	if (SpringArm == nullptr)
-	{
-		UE_LOG(LogTemp, Error, TEXT("SpringArm is null"));
-		return;
-	}
 	SpringArm->SetupAttachment(RootComponent);
 	SpringArm->bUsePawnControlRotation = true;
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(FName("Camera"));
-	if (Camera == nullptr)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Camera is null"));
-		return;
-	}
 	Camera->SetupAttachment(SpringArm);
 	
 	Tags.Add("Player");

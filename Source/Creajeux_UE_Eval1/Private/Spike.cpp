@@ -10,11 +10,6 @@
 ASpike::ASpike()
 {
 	DetectorComponent = CreateDefaultSubobject<UBoxComponent>("DetectorComponent");
-	if (!DetectorComponent)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to create a BoxComponent in ASpike"));
-		return;
-	}
 	DetectorComponent->SetupAttachment(StaticMesh);
 }
 

@@ -12,19 +12,9 @@ APickable::APickable()
 	PrimaryActorTick.bCanEverTick = true;
 
 	SphereComponent = CreateDefaultSubobject<USphereComponent>(FName("SphereComponent"));
-	if (SphereComponent == nullptr)
-	{
-		UE_LOG(LogTemp, Error, TEXT("SphereComponent is null"));
-		return;
-	}
 	RootComponent = SphereComponent;
 
 	MainMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(FName("MainMeshComponent"));
-	if (MainMeshComponent == nullptr)
-	{
-		UE_LOG(LogTemp, Error, TEXT("StaticMeshComponent is null"));
-		return;
-	}
 	MainMeshComponent->SetupAttachment(RootComponent);
 	MainMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }

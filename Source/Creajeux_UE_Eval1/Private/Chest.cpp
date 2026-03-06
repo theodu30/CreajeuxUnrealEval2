@@ -10,28 +10,13 @@ AChest::AChest()
 	MainMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	
 	ProximityComponent = CreateDefaultSubobject<USphereComponent>(FName("ProximityComponent"));
-	if (ProximityComponent == nullptr)
-	{
-		UE_LOG(LogTemp, Error, TEXT("ProximityComponent is nullptr"));
-		return;
-	}
 	ProximityComponent->SetupAttachment(RootComponent);
 	
 	LidMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(FName("LidMeshComponent"));
-	if (LidMeshComponent == nullptr)
-	{
-		UE_LOG(LogTemp, Error, TEXT("LidMeshComponent is nullptr"));
-		return;
-	}
 	LidMeshComponent->SetupAttachment(MainMeshComponent);
 	LidMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	
 	CoinMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(FName("CoinMeshComponent"));
-	if (CoinMeshComponent == nullptr)
-	{
-		UE_LOG(LogTemp, Error, TEXT("CoinMeshComponent is nullptr"));
-		return;
-	}
 	CoinMeshComponent->SetupAttachment(MainMeshComponent);
 	CoinMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }

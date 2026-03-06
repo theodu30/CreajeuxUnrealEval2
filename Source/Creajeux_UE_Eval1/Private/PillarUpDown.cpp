@@ -8,11 +8,6 @@
 APillarUpDown::APillarUpDown()
 {
 	SecondStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>("SecondStaticMesh");
-	if (!StaticMesh)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to create SecondStaticMesh"));
-		return;
-	}
 	SecondStaticMesh->SetupAttachment(Root);
 }
 

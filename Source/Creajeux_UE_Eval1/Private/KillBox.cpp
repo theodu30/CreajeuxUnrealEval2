@@ -13,11 +13,6 @@ AKillBox::AKillBox()
 	PrimaryActorTick.bCanEverTick = true;
 
 	BoxComponent = CreateDefaultSubobject<UBoxComponent>("BoxComponent");
-	if (BoxComponent == nullptr)
-	{
-		UE_LOG(LogTemp, Error, TEXT("BoxComponent is null"));
-		return;
-	}
 	RootComponent = BoxComponent;
 }
 

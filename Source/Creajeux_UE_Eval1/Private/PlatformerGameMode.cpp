@@ -43,7 +43,6 @@ void APlatformerGameMode::CallReset()
 {
 	CoinCounter = 0;
 	UpgradeCounter = 0;
-	DeathCounter = 0;
 	KeyFound = false;
 	
 	OnReset.Broadcast();
@@ -59,4 +58,13 @@ void APlatformerGameMode::AddToUpgradeTotal(const int Amount)
 {
 	UpgradeTotalCounter += Amount;
 	OnUpgradeTotal.Broadcast(UpgradeTotalCounter);
+}
+
+void APlatformerGameMode::CallUpdate()
+{
+	OnCoinCollected.Broadcast(CoinCounter);
+	OnUpgradeCollected.Broadcast(UpgradeCounter);
+	OnCoinTotal.Broadcast(CoinTotalCounter);
+	OnUpgradeTotal.Broadcast(UpgradeTotalCounter);
+	OnDeath.Broadcast(DeathCounter);
 }

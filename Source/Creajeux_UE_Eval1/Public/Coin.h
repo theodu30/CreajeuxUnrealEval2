@@ -17,6 +17,8 @@ class CREAJEUX_UE_EVAL1_API ACoin : public APickable
 	GENERATED_BODY()
 
 public:
+	ACoin();
+	
 	virtual void BeginPlay() override;
 
 	virtual void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,

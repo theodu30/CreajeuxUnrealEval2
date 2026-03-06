@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "PlayerCharacter.generated.h"
 
+class APlatformerGameMode;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputAction;
@@ -55,4 +56,28 @@ public:
 
 	UFUNCTION()
 	void Look(const FInputActionValue& InputActionValue);
+	
+	UFUNCTION()
+	void KillPlayer();
+	
+private:
+	FTimerHandle RespawnTimer;
+	
+	UFUNCTION()
+	void Respawn();
+	
+	UPROPERTY()
+	FVector DefaultLocation;
+	
+	UPROPERTY()
+	FRotator DefaultRotation;
+	
+	UPROPERTY()
+	FVector DefaultMeshLocation;
+	
+	UPROPERTY()
+	FRotator DefaultMeshRotation;
+	
+	UPROPERTY()
+	TObjectPtr<APlatformerGameMode> GameMode;
 };

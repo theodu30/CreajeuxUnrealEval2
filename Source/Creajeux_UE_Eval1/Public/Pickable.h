@@ -22,7 +22,7 @@ public:
 	TObjectPtr<USphereComponent> SphereComponent;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Components)
-	TObjectPtr<UStaticMeshComponent> StaticMeshComponent;
+	TObjectPtr<UStaticMeshComponent> MainMeshComponent;
 
 protected:
 	UFUNCTION()

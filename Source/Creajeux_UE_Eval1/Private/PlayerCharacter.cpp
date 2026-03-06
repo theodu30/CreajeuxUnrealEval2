@@ -6,6 +6,8 @@
 #include "Camera/CameraComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "PlatformerGameMode.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
@@ -38,12 +40,28 @@ APlayerCharacter::APlayerCharacter()
 		return;
 	}
 	Camera->SetupAttachment(SpringArm);
+	
+	Tags.Add("Player");
 }
 
 // Called when the game starts or when spawned
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	DefaultLocation = GetActorLocation();
+	DefaultRotation = GetActorRotation();
+	
+	if (const USkeletalMeshComponent* SkeletalMesh = GetMesh())
+	{
+		DefaultMeshLocation = SkeletalMesh->GetRelativeLocation();
+		DefaultMeshRotation = SkeletalMesh->GetRelativeRotation();
+	}
+	
+	if (UWorld* World = GetWorld())
+	{
+		GameMode = Cast<APlatformerGameMode>(World->GetAuthGameMode());
+	}
 }
 
 // Called every frame
@@ -102,4 +120,62 @@ void APlayerCharacter::Look(const FInputActionValue& InputActionValue)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void APlayerCharacter::KillPlayer()
+{
+	if (UCharacterMovementComponent* Movement = GetCharacterMovement())
+	{
+		Movement->DisableMovement();
+	}
+	
+	if (USkeletalMeshComponent* SkeletalMesh= GetMesh())
+	{
+		SkeletalMesh->SetSimulatePhysics(true);
+		SkeletalMesh->SetCollisionProfileName("Ragdoll");
+	}
+	
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().SetTimer(RespawnTimer, this, &APlayerCharacter::Respawn, 2.f);
+	}
+	
+	if (UCapsuleComponent* Capsule = GetCapsuleComponent())
+	{
+		Capsule->SetGenerateOverlapEvents(false);
+	}
+	
+	if (GameMode)
+	{
+		GameMode->AddDeath();
+	}
+}
+
+void APlayerCharacter::Respawn()
+{
+	if (UCharacterMovementComponent* Movement = GetCharacterMovement())
+	{
+		Movement->SetMovementMode(MOVE_Walking);
+	}
+	
+	if (USkeletalMeshComponent* SkeletalMesh = GetMesh())
+	{
+		SkeletalMesh->SetSimulatePhysics(false);
+		SkeletalMesh->SetCollisionProfileName("CharacterMesh");
+		
+		SkeletalMesh->AttachToComponent(SkeletalMesh->GetAttachParent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+		SkeletalMesh->SetRelativeLocationAndRotation(DefaultMeshLocation, DefaultMeshRotation);
+	}
+	
+	if (UCapsuleComponent* Capsule = GetCapsuleComponent())
+	{
+		Capsule->SetGenerateOverlapEvents(true);
+	}
+	
+	if (GameMode)
+	{
+		GameMode->CallReset();
+	}
+	
+	SetActorLocationAndRotation(DefaultLocation, DefaultRotation, false, nullptr, ETeleportType::TeleportPhysics);
 }

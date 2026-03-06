@@ -2,8 +2,12 @@
 
 
 #include "Coin.h"
-
 #include "PlatformerGameMode.h"
+
+ACoin::ACoin()
+{
+	MainMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+}
 
 void ACoin::BeginPlay()
 {
@@ -25,8 +29,11 @@ void ACoin::BeginPlay()
 void ACoin::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
                            int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	GameMode->AddCoin(1);
-	SetEnabled(false);
+	if (OtherActor && OtherActor->ActorHasTag("Player"))
+	{
+		GameMode->AddCoin(1);
+		SetEnabled(false);
+	}
 }
 
 void ACoin::OnReset()

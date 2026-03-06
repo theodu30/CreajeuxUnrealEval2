@@ -78,5 +78,8 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void AddToUpgradeTotal(const int Amount);
+
+	UFUNCTION(BlueprintCallable)
+	void CallUpdate();
 	
 };

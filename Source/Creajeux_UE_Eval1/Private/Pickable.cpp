@@ -19,14 +19,14 @@ APickable::APickable()
 	}
 	RootComponent = SphereComponent;
 
-	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(FName("StaticMeshComponent"));
-	if (StaticMeshComponent == nullptr)
+	MainMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(FName("MainMeshComponent"));
+	if (MainMeshComponent == nullptr)
 	{
 		UE_LOG(LogTemp, Error, TEXT("StaticMeshComponent is null"));
 		return;
 	}
-	StaticMeshComponent->SetupAttachment(RootComponent);
-	StaticMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	MainMeshComponent->SetupAttachment(RootComponent);
+	MainMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 void APickable::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -47,10 +47,12 @@ void APickable::BeginPlay()
 void APickable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+	AddActorLocalRotation(FRotator(0.0f, 90.f * DeltaTime, 0.0f));
 }
 
 void APickable::SetEnabled(bool bEnable)
 {
 	SphereComponent->SetGenerateOverlapEvents(bEnable);
-	StaticMeshComponent->SetVisibility(bEnable);
+	MainMeshComponent->SetVisibility(bEnable);
 }
